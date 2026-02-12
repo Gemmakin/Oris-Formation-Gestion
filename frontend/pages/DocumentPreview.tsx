@@ -154,9 +154,7 @@ export default function DocumentPreview() {
                 {!isInvoice && 'validUntil' in docData && (
                   <p><span className="text-slate-400">Valable jusqu'au :</span> <span className="font-medium">{new Date(docData.validUntil).toLocaleDateString('fr-FR')}</span></p>
                 )}
-                {isInvoice && !isCreditNote && 'dueDate' in docData && (
-                  <p><span className="text-slate-400">Date d'échéance :</span> <span className="font-medium">{new Date(docData.dueDate).toLocaleDateString('fr-FR')}</span></p>
-                )}
+                {/* Date d'échéance supprimée pour les factures */}
                 {isCreditNote && 'originalInvoiceNumber' in docData && (
                   <p className="text-purple-600 font-medium mt-2">Annule la facture N° {docData.originalInvoiceNumber}</p>
                 )}
@@ -173,7 +171,7 @@ export default function DocumentPreview() {
                 <p className="text-slate-600 text-sm whitespace-pre-line">{client.address}</p>
                 <p className="text-slate-600 text-sm">{client.zip} {client.city}</p>
                 {client.vatNumber && <p className="text-xs text-slate-400 mt-3">TVA: {client.vatNumber}</p>}
-                <p className={`text-sm mt-2 font-medium ${isCreditNote ? 'text-purple-600' : 'text-blue-600'}`}>Attn: {client.contactName}</p>
+                <p className={`text-sm mt-2 font-medium ${isCreditNote ? 'text-purple-600' : 'text-blue-600'}`}>{client.contactName}</p>
               </div>
             </div>
           </section>
@@ -217,7 +215,7 @@ export default function DocumentPreview() {
                   <p className="font-bold text-slate-700 mb-2 uppercase">Coordonnées Bancaires</p>
                   <div className="grid grid-cols-[60px_1fr] gap-y-1 text-slate-600">
                     <span className="font-medium">Banque</span>
-                    <span>Crédit Mutuel</span>
+                    <span>LCL</span>
                     <span className="font-medium">IBAN</span>
                     <span className="font-mono">{company.iban}</span>
                     <span className="font-medium">BIC</span>
